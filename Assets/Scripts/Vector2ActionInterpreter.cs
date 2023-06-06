@@ -12,8 +12,6 @@ public class Vector2ActionInterpreter
     {
         InputEvents = inputEvents;
         ActionName = actionNameToInterpret;
-
-        StartListening();
     }
 
     public Vector2 GetVector2Direction()
@@ -26,14 +24,13 @@ public class Vector2ActionInterpreter
         InputDirection = context.ReadValue<Vector2>(); 
     }
 
-    private void StartListening()
+    public void StartListening()
     {
         InputEvents.RegisterOnStartPerformedAndCancelled(ActionName, OnInput);
     }
 
-    private void StopListening()
+    public void StopListening()
     {
         InputEvents.UnregisterOnStartPerformedAndCancelled(ActionName, OnInput);
-
     }
 }
