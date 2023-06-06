@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        MovePlayer(MoveInterpreter.GetVector2Direction());
+        MovePlayer(MoveInterpreter.GetDirection());
     }
 
     private void MovePlayer(Vector2 direction)
