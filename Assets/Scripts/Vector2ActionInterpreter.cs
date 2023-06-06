@@ -1,36 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Vector2ActionInterpreter
+public class Vector2ActionInterpreter : ActionInterpreter
 {
-    private CustomInputEvents InputEvents;
-    private string ActionName = PlayerActionMap.Move;
+    private Vector2 Direction;
+    public Vector2ActionInterpreter(CustomInputEvents inputEvents, string actionNameToInterpret) : base(inputEvents, actionNameToInterpret) { }
 
-    private Vector2 InputDirection;
-
-    public Vector2ActionInterpreter(CustomInputEvents inputEvents, string actionNameToInterpret)
+    public Vector2 GetDirection()
     {
-        InputEvents = inputEvents;
-        ActionName = actionNameToInterpret;
+        return Direction;
     }
 
-    public Vector2 GetVector2Direction()
+    protected override void OnInput(InputAction.CallbackContext context)
     {
-        return InputDirection;
-    }
-
-    private void OnInput(InputAction.CallbackContext context)
-    {
-        InputDirection = context.ReadValue<Vector2>(); 
-    }
-
-    public void StartListening()
-    {
-        InputEvents.RegisterOnStartPerformedAndCancelled(ActionName, OnInput);
-    }
-
-    public void StopListening()
-    {
-        InputEvents.UnregisterOnStartPerformedAndCancelled(ActionName, OnInput);
+        Direction = context.ReadValue<Vector2>();
     }
 }
