@@ -30,6 +30,5 @@ public class Player : MonoBehaviour
     private void MovePlayer(Vector2 direction)
     {
         gameObject.transform.Translate(direction * Time.deltaTime);
-        Debug.Log("translating to direction: " + direction.x *Time.deltaTime);
     }
 }
