@@ -6,7 +6,7 @@ public abstract class ActionInterpreter<T>
     protected CustomInputEvents InputEvents;
     protected string ActionName;
 
-    public Action<T> OnInputInterpreted;
+    public event Action<T> OnInputInterpreted;
 
     public ActionInterpreter(CustomInputEvents inputEvents, string actionNameToInterpret)
     {
