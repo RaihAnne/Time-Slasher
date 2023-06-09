@@ -10,10 +10,16 @@ public class CustomInputEvents : MonoBehaviour
 
     private Dictionary<string, InputAction> DictionaryOfActions = new Dictionary<string, InputAction>();
 
+    public static Action<Vector2> OnMove;
+
+    Vector2ActionInterpreter MoveInterpreter;
+    BooleanActionInterpreter StopTImeInterpreter;
+
     private void Awake()
     {
         DictionaryOfActions.Add(PlayerActionMap.Move, GetAction(PlayerActionMap.Move));
-        DictionaryOfActions.Add(PlayerActionMap.Attack, GetAction(PlayerActionMap.Attack));
+        DictionaryOfActions.Add(PlayerActionMap.StopTime, GetAction(PlayerActionMap.StopTime));
+
     }
 
     public void RegisterOnStartPerformedAndCancelled(string actionName , Action<InputAction.CallbackContext> callback)   
@@ -60,5 +66,5 @@ public static class PlayerActionMap
 {
     public const string ActionMap = "Player";
     public const string Move = "Move";
-    public const string Attack = "Attack";
+    public const string StopTime = "StopTime";
 }
