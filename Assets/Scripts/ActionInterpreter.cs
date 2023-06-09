@@ -1,9 +1,12 @@
-﻿using UnityEngine.InputSystem;
+﻿using System;
+using UnityEngine.InputSystem;
 
-public abstract class ActionInterpreter
+public abstract class ActionInterpreter<T>
 {
     protected CustomInputEvents InputEvents;
     protected string ActionName;
+
+    public Action<T> OnInputInterpreted;
 
     public ActionInterpreter(CustomInputEvents inputEvents, string actionNameToInterpret)
     {
@@ -21,6 +24,11 @@ public abstract class ActionInterpreter
         InputEvents.UnregisterOnStartPerformedAndCancelled(ActionName, OnInput);
     }
 
-    protected abstract void OnInput(InputAction.CallbackContext context);
+    private void OnInput(InputAction.CallbackContext context)
+    {
+        OnInputInterpreted?.Invoke(Interpret(context));
+    }
+
+    protected abstract T Interpret(InputAction.CallbackContext context);
 
 }
