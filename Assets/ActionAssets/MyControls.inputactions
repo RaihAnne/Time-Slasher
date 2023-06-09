@@ -15,7 +15,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Attack",
+                    "name": "StopTime",
                     "type": "PassThrough",
                     "id": "38ca62c0-1d86-4218-af3d-634a651f3c72",
                     "expectedControlType": "Button",
@@ -26,7 +26,7 @@
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
+                    "name": "Keyboard WASD",
                     "id": "854ea961-86a2-4de7-8f4c-05a9a1a73c99",
                     "path": "2DVector",
                     "interactions": "",
@@ -87,7 +87,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Player",
-                    "action": "Attack",
+                    "action": "StopTime",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
