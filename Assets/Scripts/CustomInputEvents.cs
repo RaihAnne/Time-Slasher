@@ -10,8 +10,8 @@ public class CustomInputEvents : MonoBehaviour
 
     private Dictionary<string, InputAction> DictionaryOfActions = new Dictionary<string, InputAction>();
 
-    public static Action<Vector2> OnMove;
-    public static Action<bool> OnStopTime;
+    public static event Action<Vector2> OnMove;
+    public static event Action<bool> OnStopTime;
 
     private Vector2ActionInterpreter MoveInterpreter;
     private BooleanActionInterpreter StopTimeInterpreter;
