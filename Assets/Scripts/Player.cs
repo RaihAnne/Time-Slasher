@@ -11,6 +11,12 @@ public class Player : MonoBehaviour
         CustomInputEvents.OnStopTime += StopTime;
     }
 
+    private void OnDisable()
+    {
+        CustomInputEvents.OnMove -= OnInputMove;
+        CustomInputEvents.OnStopTime -= StopTime;
+    }
+
     private void Update()
     {
         MovePlayer(moveDirection);
