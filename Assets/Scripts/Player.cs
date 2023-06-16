@@ -4,12 +4,22 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private Vector2 moveDirection;
     private void Awake()
     {
-        CustomInputEvents.OnMove += MovePlayer;
+        CustomInputEvents.OnMove += OnInputMove;
         CustomInputEvents.OnStopTime += StopTime;
     }
 
+    private void Update()
+    {
+        MovePlayer(moveDirection);
+    }
+
+    private void OnInputMove(Vector2 direction)
+    {
+        moveDirection = direction;
+    }
 
     private void MovePlayer(Vector2 direction)
     {
