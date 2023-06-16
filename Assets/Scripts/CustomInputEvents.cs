@@ -11,16 +11,26 @@ public class CustomInputEvents : MonoBehaviour
     private Dictionary<string, InputAction> DictionaryOfActions = new Dictionary<string, InputAction>();
 
     public static Action<Vector2> OnMove;
+    public static Action<bool> OnStopTime;
 
-    Vector2ActionInterpreter MoveInterpreter;
-    BooleanActionInterpreter StopTImeInterpreter;
+    private Vector2ActionInterpreter MoveInterpreter;
+    private BooleanActionInterpreter StopTimeInterpreter;
 
     private void Awake()
     {
         DictionaryOfActions.Add(PlayerActionMap.Move, GetAction(PlayerActionMap.Move));
         DictionaryOfActions.Add(PlayerActionMap.StopTime, GetAction(PlayerActionMap.StopTime));
 
+        MoveInterpreter = new Vector2ActionInterpreter(this, PlayerActionMap.Move);
+        StopTimeInterpreter = new BooleanActionInterpreter(this, PlayerActionMap.StopTime);
+
+        MoveInterpreter.OnInputInterpreted += OnMoveDetected;
+        StopTimeInterpreter.OnInputInterpreted += OnStopTimeDetected;
+
+        MoveInterpreter.StartListening();
+        StopTimeInterpreter.StartListening();
     }
+
 
     public void RegisterOnStartPerformedAndCancelled(string actionName , Action<InputAction.CallbackContext> callback)   
     {
@@ -60,6 +70,16 @@ public class CustomInputEvents : MonoBehaviour
 
         return CustomPlayerInput.actions[actionName];
     }  
+
+    private void OnMoveDetected(Vector2 direction)
+    {
+        OnMove?.Invoke(direction);
+    }
+
+    private void OnStopTimeDetected(bool isPressing)
+    {
+        OnStopTime?.Invoke(isPressing);
+    }
 }
 
 public static class PlayerActionMap

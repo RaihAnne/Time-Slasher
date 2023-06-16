@@ -1,4 +1,5 @@
-﻿using UnityEngine.InputSystem;
+﻿using System;
+using UnityEngine.InputSystem;
 
 public class BooleanActionInterpreter : ActionInterpreter<bool>
 {
@@ -8,7 +9,7 @@ public class BooleanActionInterpreter : ActionInterpreter<bool>
 
     protected override bool Interpret(InputAction.CallbackContext context)
     {
-        IsPressed = context.ReadValue<bool>();
+        IsPressed = context.ReadValueAsButton();
         return IsPressed;
     }
 }

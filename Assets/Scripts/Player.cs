@@ -4,31 +4,21 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] CustomInputEvents InputEvents;
-    private Vector2ActionInterpreter MoveInterpreter;
-
     private void Awake()
     {
-        
-    }
-    private void OnEnable()
-    {
-        MoveInterpreter = new Vector2ActionInterpreter(InputEvents, PlayerActionMap.Move);
-        MoveInterpreter.StartListening();
+        CustomInputEvents.OnMove += MovePlayer;
+        CustomInputEvents.OnStopTime += StopTime;
     }
 
-    private void OnDisable()
-    {
-        MoveInterpreter.StopListening();
-    }
-
-    private void Update()
-    {
-        MovePlayer(MoveInterpreter.GetDirection());
-    }
 
     private void MovePlayer(Vector2 direction)
     {
         gameObject.transform.Translate(direction * Time.deltaTime);
+        Debug.Log("direction = " + direction);
+    }
+
+    private void StopTime(bool isStoppingTime)
+    {
+        Debug.Log("stopping Time: " + isStoppingTime);
     }
 }

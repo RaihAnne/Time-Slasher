@@ -6,9 +6,9 @@ public abstract class ActionInterpreter<T>
     protected CustomInputEvents InputEvents;
     protected string ActionName;
 
-    public event Action<T> OnInputInterpreted;
+    public Action<T> OnInputInterpreted;
 
-    public ActionInterpreter(CustomInputEvents inputEvents, string actionNameToInterpret)
+    protected ActionInterpreter(CustomInputEvents inputEvents, string actionNameToInterpret)
     {
         InputEvents = inputEvents;
         ActionName = actionNameToInterpret;
@@ -30,5 +30,4 @@ public abstract class ActionInterpreter<T>
     }
 
     protected abstract T Interpret(InputAction.CallbackContext context);
-
 }
